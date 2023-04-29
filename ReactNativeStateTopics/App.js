@@ -1,7 +1,8 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import PageHeader from "./components/PageHeader";
 import CustomInput from "./components/CustomInput";
 import BodyText from "./components/BodyText";
+import Product from "./components/Product";
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <PageHeader />
       <CustomInput />
       <BodyText />
+      <Product />
     </SafeAreaView>
   );
 }
