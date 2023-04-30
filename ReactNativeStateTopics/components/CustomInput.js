@@ -1,16 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, TextInput, Pressable, Text } from "react-native";
 import { postProduct } from "../actions/postProduct";
+import { getProducts } from "../actions/getProducts";
 
-const CustomInput = () => {
-  const [product, setProduct] = useState();
-  postProduct(setProduct);
+const CustomInput = ({ products, setProducts }) => {
+  const [productName, setProductName] = useState("");
+  const [categoryName, setCategoryName] = useState("");
+  const [price, setPrice] = useState("");
+
+  const handleSubmit = () => {
+    postProduct("", { productName, categoryName, price })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    setCategoryName("");
+    setProductName("");
+    setPrice("");
+  };
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} placeholder="Enter product name" />
-      <TextInput style={styles.input} placeholder="Enter price" />
-      <TextInput style={styles.input} placeholder="Enter category" />
-      <Pressable style={styles.button}>
+      <TextInput
+        defaultValue={productName}
+        onChangeText={(value) => setProductName(value)}
+        style={styles.input}
+        placeholder="Enter product name"
+      />
+      <TextInput
+        defaultValue={categoryName}
+        onChangeText={(value) => setCategoryName(value)}
+        style={styles.input}
+        placeholder="Enter category"
+      />
+      <TextInput
+        defaultValue={price}
+        onChangeText={(value) => setPrice(value)}
+        style={styles.input}
+        placeholder="Enter price"
+      />
+      <Pressable onPress={handleSubmit} style={styles.button}>
         <Text style={styles.text}>Add</Text>
       </Pressable>
     </View>

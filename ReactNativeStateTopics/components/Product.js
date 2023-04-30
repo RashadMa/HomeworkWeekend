@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import { getProducts } from "../actions/getProducts";
 
-const Product = () => {
-  const [products, setProducts] = useState();
+const Product = ({products, setProducts}) => {
+  // const [products, setProducts] = useState([]);
   useEffect(() => {
     getProducts()
       .then((res) => {
