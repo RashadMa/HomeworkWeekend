@@ -10,13 +10,15 @@ import {
 import { getProducts } from "../actions/getProducts";
 import { deleteProduct } from "../actions/deleteProduct";
 import { editProduct } from "../actions/editProduct";
-import axios from "axios";
 
 const Product = ({ products, setProducts }) => {
   const [productName, setProductName] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [price, setPrice] = useState("");
   const [prdId, setPrdId] = useState("");
+  const [inputPrdName, setInputPrdName] = useState("");
+  const [inputCatName, setInputCatName] = useState("");
+  const [inputPrice, setInputPrice] = useState("");
 
   useEffect(() => {
     getProducts()
@@ -48,6 +50,7 @@ const Product = ({ products, setProducts }) => {
             <View>
               <Image
                 style={styles.tinyIcon}
+                r
                 source={require("../assets/icons.png")}
               />
             </View>
@@ -67,13 +70,21 @@ const Product = ({ products, setProducts }) => {
               <Text style={styles.text}>delete</Text>
             </Pressable>
             <Pressable style={styles.editButton}>
-              <Text onPress={() => setPrdId(item.id)} style={styles.text}>
+              <Text
+                onPress={() => {
+                  setPrdId(item.id);
+                }}
+                style={styles.text}
+              >
                 edit
               </Text>
             </Pressable>
           </View>
         </View>
       ))}
+      <View style={styles.container1}>
+        <Text style={styles.footerText}>Update Product</Text>
+      </View>
       <View style={styles.container}>
         <TextInput
           value={productName}
@@ -192,6 +203,16 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     fontWeight: "600",
     color: "white",
+  },
+  footerText: {
+    fontWeight: "600",
+    fontSize: 30,
+    color: "#1E232C",
+  },
+  container1: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 30,
   },
 });
 

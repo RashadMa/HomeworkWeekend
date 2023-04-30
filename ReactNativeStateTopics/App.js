@@ -3,8 +3,6 @@ import PageHeader from "./components/PageHeader";
 import CustomInput from "./components/CustomInput";
 import BodyText from "./components/BodyText";
 import Product from "./components/Product";
-import FooterText from "./components/FooterText";
-import EditInput from "./components/EditInput";
 import { useState } from "react";
 
 export default function App() {
@@ -16,8 +14,6 @@ export default function App() {
         <CustomInput setProducts={setProducts} products={products} />
         <BodyText />
         <Product setProducts={setProducts} products={products} />
-        <FooterText />
-        {/* <EditInput /> */}
       </ScrollView>
     </SafeAreaView>
   );
