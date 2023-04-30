@@ -10,9 +10,14 @@ import {
 import { getProducts } from "../actions/getProducts";
 import { deleteProduct } from "../actions/deleteProduct";
 import { editProduct } from "../actions/editProduct";
+import axios from "axios";
 
 const Product = ({ products, setProducts }) => {
-  // const [products, setProducts] = useState([]);
+  const [productName, setProductName] = useState("");
+  const [categoryName, setCategoryName] = useState("");
+  const [price, setPrice] = useState("");
+  const [prdId, setPrdId] = useState("");
+
   useEffect(() => {
     getProducts()
       .then((res) => {
@@ -27,8 +32,12 @@ const Product = ({ products, setProducts }) => {
     deleteProduct(id);
   };
 
-  const handleEdit = (id, { productName, categoryName, price }) => {
-    editProduct(id, { productName, categoryName, price });
+  const handleEdit = () => {
+    editProduct(prdId, {
+      productName: productName,
+      categoryName: categoryName,
+      price: price,
+    });
   };
 
   return (
@@ -58,7 +67,7 @@ const Product = ({ products, setProducts }) => {
               <Text style={styles.text}>delete</Text>
             </Pressable>
             <Pressable style={styles.editButton}>
-              <Text onPress={() => handleEdit(item.id)} style={styles.text}>
+              <Text onPress={() => setPrdId(item.id)} style={styles.text}>
                 edit
               </Text>
             </Pressable>
@@ -66,10 +75,25 @@ const Product = ({ products, setProducts }) => {
         </View>
       ))}
       <View style={styles.container}>
-        <TextInput style={styles.input} placeholder="Enter product name" />
-        <TextInput style={styles.input} placeholder="Enter price" />
-        <TextInput style={styles.input} placeholder="Enter category" />
-        <Pressable style={styles.button}>
+        <TextInput
+          value={productName}
+          onChangeText={setProductName}
+          style={styles.input}
+          placeholder="Enter product name"
+        />
+        <TextInput
+          value={categoryName}
+          onChangeText={setCategoryName}
+          style={styles.input}
+          placeholder="Enter category"
+        />
+        <TextInput
+          value={price}
+          onChangeText={setPrice}
+          style={styles.input}
+          placeholder="Enter price"
+        />
+        <Pressable onPress={() => handleEdit(prdId)} style={styles.button}>
           <Text style={styles.textA}>Edit</Text>
         </Pressable>
       </View>
@@ -82,8 +106,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 8,
-    position: "absolute",
-    right: -44,
     top: 3,
   },
   mainHolder: {
@@ -106,8 +128,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   midSide: {
-    marginLeft: 13,
-    transform: [{ translateX: 60 }],
+    marginLeft: 20,
   },
   categoryName: {
     fontWeight: "400",

@@ -1,33 +1,24 @@
-import {
-  Button,
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import PageHeader from "./components/PageHeader";
 import CustomInput from "./components/CustomInput";
 import BodyText from "./components/BodyText";
 import Product from "./components/Product";
 import FooterText from "./components/FooterText";
 import EditInput from "./components/EditInput";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { postProduct } from "./actions/postProduct";
+import { useState } from "react";
 
 export default function App() {
   const [products, setProducts] = useState([]);
   return (
     <SafeAreaView style={styles.container}>
-      <PageHeader />
-      <CustomInput setProducts={setProducts} products={products} />
-      <BodyText />
-      <Product setProducts={setProducts} products={products} />
-      <FooterText />
-      {/* <EditInput /> */}
+      <ScrollView style={styles.scrollView}>
+        <PageHeader />
+        <CustomInput setProducts={setProducts} products={products} />
+        <BodyText />
+        <Product setProducts={setProducts} products={products} />
+        <FooterText />
+        {/* <EditInput /> */}
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -36,5 +27,8 @@ const styles = StyleSheet.create({
   container: {
     margin: 30,
     backgroundColor: "#fff",
+  },
+  scrollView: {
+    marginBottom: 10,
   },
 });
