@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Image, Text, Pressable } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  Pressable,
+  TextInput,
+} from "react-native";
 import { getProducts } from "../actions/getProducts";
+import { deleteProduct } from "../actions/deleteProduct";
+import { editProduct } from "../actions/editProduct";
 
-const Product = ({products, setProducts}) => {
+const Product = ({ products, setProducts }) => {
   // const [products, setProducts] = useState([]);
   useEffect(() => {
     getProducts()
@@ -13,6 +22,15 @@ const Product = ({products, setProducts}) => {
         console.log(error);
       });
   }, []);
+
+  const handleDelete = (id) => {
+    deleteProduct(id);
+  };
+
+  const handleEdit = (id, { productName, categoryName, price }) => {
+    editProduct(id, { productName, categoryName, price });
+  };
+
   return (
     <View>
       {products?.map((item) => (
@@ -33,15 +51,28 @@ const Product = ({products, setProducts}) => {
             </View>
           </View>
           <View style={styles.buttonWrapper}>
-            <Pressable style={styles.deleteButton}>
+            <Pressable
+              onPress={() => handleDelete(item.id)}
+              style={styles.deleteButton}
+            >
               <Text style={styles.text}>delete</Text>
             </Pressable>
             <Pressable style={styles.editButton}>
-              <Text style={styles.text}>edit</Text>
+              <Text onPress={() => handleEdit(item.id)} style={styles.text}>
+                edit
+              </Text>
             </Pressable>
           </View>
         </View>
       ))}
+      <View style={styles.container}>
+        <TextInput style={styles.input} placeholder="Enter product name" />
+        <TextInput style={styles.input} placeholder="Enter price" />
+        <TextInput style={styles.input} placeholder="Enter category" />
+        <Pressable style={styles.button}>
+          <Text style={styles.textA}>Edit</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -114,6 +145,32 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     flexDirection: "column",
     justifyContent: "center",
+  },
+  container: {
+    marginVertical: 15,
+  },
+  input: {
+    backgroundColor: "#F7F8F9",
+    borderColor: "#E8ECF4",
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 8,
+    marginVertical: 5,
+  },
+  button: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 6,
+    elevation: 3,
+    backgroundColor: "#1E232C",
+    borderRadius: 8,
+    marginVertical: 10,
+  },
+  textA: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: "600",
+    color: "white",
   },
 });
 

@@ -27,7 +27,7 @@ export default function App() {
       <BodyText />
       <Product setProducts={setProducts} products={products} />
       <FooterText />
-      <EditInput />
+      {/* <EditInput /> */}
     </SafeAreaView>
   );
 }
