@@ -3,6 +3,8 @@ import PageHeader from "./components/PageHeader";
 import CustomInput from "./components/CustomInput";
 import BodyText from "./components/BodyText";
 import Product from "./components/Product";
+import FooterText from "./components/FooterText";
+import EditInput from "./components/EditInput";
 
 export default function App() {
   return (
@@ -11,6 +13,8 @@ export default function App() {
       <CustomInput />
       <BodyText />
       <Product />
+      <FooterText/>
+      <EditInput/>
     </SafeAreaView>
   );
 }

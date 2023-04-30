@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, TextInput, Pressable, Text } from "react-native";
-import { postProduct } from "../actions/postProduct";
 
-const CustomInput = () => {
-  const [product, setProduct] = useState();
-  postProduct(setProduct);
+const EditInput = () => {
   return (
     <View style={styles.container}>
       <TextInput style={styles.input} placeholder="Enter product name" />
       <TextInput style={styles.input} placeholder="Enter price" />
       <TextInput style={styles.input} placeholder="Enter category" />
       <Pressable style={styles.button}>
-        <Text style={styles.text}>Add</Text>
+        <Text style={styles.text}>Edit</Text>
       </Pressable>
     </View>
   );
@@ -46,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomInput;
+export default EditInput;
